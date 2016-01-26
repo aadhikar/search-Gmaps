@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="x-ua-compatible" content="IE=Edge"/>
+  <meta charset="UTF-8">
+  <meta name="description" content=".">
+  <meta name="viewport" content="initial-scale=1.0">
+
+
+  <title>GoogleMaps</title>
+
+  <!--[if lt IE 9]>
+  <script src="libs/html5shiv.min.js"></script>
+  <![endif]-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+  <link rel="icon" href="AlphaFavicon.ico" type="image/x-icon">
+
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="stylesheets/styles.css">
+  <script type="text/javascript" src="scripts/app.js"></script>
+</head>
+<body ng-app="placeSearch">
+
+<div class="container-fluid" ng-controller="placeSearchController">
+  <div class="row">
+    <section class="col-md-6 col-md-offset-1">
+      <form id="searchMap" class="form-horizontal">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" id="inputSearch" ng-model="searchParam">
+
+          <div class="input-group-btn">
+            <button class="btn btn-default" ng-click="getPlaces(searchParam)"><i
+                class="glyphicon glyphicon-map-marker"></i>search
+            </button>
+            <!--<button class="btn btn-primary" ng-click="ShowSaved()">My Saved Searches</button>-->
+          </div>
+        </div>
+      </form>
+      <div id="searchContainer">
+        <table class="table table-bordered">
+          <thead>
+          <th>Name</th>
+          <th>Rating</th>
+          </thead>
+          <tbody>
+          <tr ng-repeat="place in searchResults">
+            <td>{{place.name}}</td>
+            <td>{{place.rating||'N/A'}}</td>
+            <td ng-hide="hideSave">
+              <button class="btn btn-primary" ng-click="savePlace(place.name, place.rating)">Save</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <div>
+      <button class="btn btn-primary col-md-2 col-md-offset-2" ng-click="ShowSaved()">My Saved Searches</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
